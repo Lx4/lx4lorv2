@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
-import Cards from '@/views/cards.vue'
-import Home from '@/views/index.vue'
-import Live from '@/views/live.vue'
+import Card from '@/views/card.vue';
+import Cards from '@/views/cards.vue';
+import Home from '@/views/index.vue';
+import Live from '@/views/live.vue';
 
 const routes = [
   {
@@ -12,19 +13,25 @@ const routes = [
   },
   {
     path: '/cards',
-    name: 'About',
+    name: 'Cards',
     component: Cards
   },
   {
     path: '/live',
-    name: 'live',
+    name: 'Live',
     component: Live
   },
-]
+  {
+    path: '/card/:cardCode',
+    name: 'Card',
+    component: Card,
+    props: true
+  }
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

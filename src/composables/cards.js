@@ -9,6 +9,8 @@ const state = ref({
   )
 });
 
+const getCardsData = computed(() => state.value.cardsData);
+
 const getRandomCode = computed(() => {
   const filteredCards = state.value.cardsData.filter(
     card => card.type === 'Unit'
@@ -17,4 +19,4 @@ const getRandomCode = computed(() => {
     .cardCode;
 });
 
-export { getRandomCode };
+export { getRandomCode, getCardsData };

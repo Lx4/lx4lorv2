@@ -2,7 +2,7 @@
   <nav class="flex px-4 py-4 bg-gray-800 text-white justify-between">
     <ul class="flex items-center">
       <li class="pr-4">
-        <router-link  to="/">
+        <router-link to="/">
           <svg
             class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -27,11 +27,9 @@
       </li>
     </ul>
     <!-- <div class="smallnum" v-if="cartCount > 0">{{ cartCount }}</div> -->
-    <router-link to="/profile">Profile</router-link>
+    <!-- <router-link to="/profile">Profile</router-link> -->
   </nav>
 </template>
-
-
 
 <script>
 export default {};
