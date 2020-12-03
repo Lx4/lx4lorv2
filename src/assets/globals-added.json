@@ -1,0 +1,3 @@
+{
+  "types": ["Champion", "Follower", "Spell", "Landmark"]
+}

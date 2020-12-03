@@ -1,30 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <div class="content flex flex-col">
+      <Menu />
+      <router-view />
+    </div>
+    <Footer />
   </div>
-  <router-view/>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Menu from '@/components/Menu.vue';
+import Footer from '@/components/Footer.vue';
+
+export default {
+  components: {
+    Menu,
+    Footer
+  }
+};
+</script>
+
+<style lang="scss">
+.button {
+  @apply bg-teal-700 px-5 py-2 rounded text-white;
+  transition: all 0.1s ease;
 }
 
-#nav {
-  padding: 30px;
+.button:hover {
+  @apply bg-teal-500;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+// Filters
+.line {
+  height: 1px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+// sticky footer
+.content {
+  min-height: calc(100vh - 50px);
+}
+
+footer {
+  height: 50px;
 }
 </style>
