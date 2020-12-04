@@ -41,77 +41,76 @@
 <script>
 import Filters from '@/components/Filters.vue';
 import CardsList from '@/components/CardsList.vue';
-// import gsap from 'gsap';
 
-//import { mapState } from 'vuex';
-import { getCardsData } from '../composables/cards';
-import { getFilters } from '../composables/filters';
-import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
     Filters,
-    CardsList,
+    CardsList
   },
-  setup () {
-    const showFilters = ref(false);
-    const cardsData = getCardsData.value;
-    const filters = getFilters.value;
-
-    const filteredCards = computed(() => {
-      let result = cardsData;
+  data() {
+    return {
+      showFilters: false
+    };
+  },
+  computed: {
+    ...mapState(['cardsData', 'filters']),
+    filteredCards() {
+      let result = this.cardsData;
       // filter by sets
-      if (filters.sets.length !== 0) {
-        result = result.filter((card) => {
-          return filters.sets
+      if (this.filters.sets.length !== 0) {
+        result = result.filter(card => {
+          return this.filters.sets
             .map(({ nameRef }) => nameRef)
             .includes(card.set);
         });
       }
       // filter by regions
-      if (filters.regions.length !== 0) {
-        result = result.filter((card) => {
-          return filters.regions
+      if (this.filters.regions.length !== 0) {
+        result = result.filter(card => {
+          return this.filters.regions
             .map(({ nameRef }) => nameRef)
             .includes(card.regionRef);
         });
       }
       // filter by manacost
-      if (filters.mana.length !== 0) {
-        result = result.filter((card) => {
+      if (this.filters.mana.length !== 0) {
+        result = result.filter(card => {
           return (
-            filters.mana.includes(card.cost) ||
-            (card.cost > 7 && filters.mana.includes(7))
+            this.filters.mana.includes(card.cost) ||
+            (card.cost > 7 && this.filters.mana.includes(7))
           );
         });
       }
       return result;
-    })
-    const filteredCardsNumber = computed(() =>  filteredCards.length);
-
-    const toggleFilters = () => showFilters.value = !showFilters.value;
-
-    const onResize = () => {
-      if (window.innerWidth > 960) {
-        showFilters.value = true;
-      } else {
-        showFilters.value = false;
-      }
     },
-  return {showFilters, filteredCards, filteredCardsNumber, toggleFilters}
-  }
-
-  onMounted() {
-    window.addEventListener('resize', onResize);
+    filteredCardsNumber() {
+      return this.filteredCards.length;
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.onResize);
     if (window.innerWidth > 960) {
       this.showFilters = true;
     }
   },
+  methods: {
+    toggleFilters() {
+      this.showFilters = !this.showFilters;
+    },
+    onResize() {
+      if (window.innerWidth > 960) {
+        this.showFilters = true;
+      } else {
+        this.showFilters = false;
+      }
+    }
   },
 
   beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
-  },
+  }
 };
 </script>
 
