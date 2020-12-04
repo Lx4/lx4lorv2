@@ -41,6 +41,7 @@
 <script>
 import Filters from '@/components/Filters.vue';
 import CardsList from '@/components/CardsList.vue';
+import { getCardsData } from '../composables/cards';
 
 import { mapState } from 'vuex';
 
@@ -51,11 +52,15 @@ export default {
   },
   data() {
     return {
-      showFilters: false
+      showFilters: false,
+      cardsData: getCardsData.value
     };
   },
   computed: {
-    ...mapState(['cardsData', 'filters']),
+    ...mapState(['filters']),
+    filteredCardsNumber() {
+      return this.filteredCards.length;
+    },
     filteredCards() {
       let result = this.cardsData;
       // filter by sets
@@ -84,9 +89,6 @@ export default {
         });
       }
       return result;
-    },
-    filteredCardsNumber() {
-      return this.filteredCards.length;
     }
   },
   mounted() {

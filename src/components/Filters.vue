@@ -21,9 +21,9 @@
       </svg>
     </div>
 
-    <div class="mt-4">
+    <!-- <div class="mt-4">
       <filter-sets />
-    </div>
+    </div> -->
     <div class="mt-4">
       <filter-regions />
     </div>
@@ -47,8 +47,8 @@ export default {
     FilterSets,
     FilterRegions,
     FilterManacost,
-    FilterTypes,
-  },
+    FilterTypes
+  }
 };
 </script>
 
